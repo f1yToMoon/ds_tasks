@@ -1,0 +1,9 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python task.ipynb
+    deps:
+    - path: task.ipynb
+      hash: md5
+      md5: 1ab2d1b296725ca55567aa4c09452be2
+      size: 314172

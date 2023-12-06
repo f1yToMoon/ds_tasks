@@ -15,5 +15,10 @@ plots:
     title: Test Confusion Matrix
     x_label: True Label
     y_label: Predicted Label
+stages:
+  train:
+    cmd: python task.ipynb
+    deps:
+    - task.ipynb
 params:
 - dvclive/params.yaml
