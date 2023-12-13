@@ -1,0 +1,48 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train.py data/features
+    deps:
+    - path: data/features
+      hash: md5
+      md5: e6ec9fad1f425df960da6c54c07d44a5.dir
+      size: 838419
+      nfiles: 2
+    - path: src/train.py
+      hash: md5
+      md5: e9e93fcb8d3122d51843ad1e702132e1
+      size: 1691
+    params:
+      params.yaml:
+        train.n_estimators: 10
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - path: src/prepare.py
+      hash: md5
+      md5: 5e46c2b7730d6f4cd2754617fb962497
+      size: 1066
+    outs:
+    - path: data/prepared
+      hash: md5
+      md5: c880824d6d7135de3e031f9ebf5efe78.dir
+      size: 814035
+      nfiles: 2
+  featurize:
+    cmd: python src/featurize.py data/prepared data/features
+    deps:
+    - path: data/prepared
+      hash: md5
+      md5: c880824d6d7135de3e031f9ebf5efe78.dir
+      size: 814035
+      nfiles: 2
+    - path: src/featurize.py
+      hash: md5
+      md5: 5c24b0b3e34bae1551b2616f470f0a3f
+      size: 2708
+    outs:
+    - path: data/features
+      hash: md5
+      md5: e6ec9fad1f425df960da6c54c07d44a5.dir
+      size: 838419
+      nfiles: 2
