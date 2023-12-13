@@ -19,15 +19,15 @@ stages:
     - src/train.py
     params:
     - train.n_estimators
-plots:
-- dvclive/plots/sklearn/train/confusion_matrix.json:
-    template: simple
-    x: fpr
-    y: tpr
-    title: Train Confusion Matrix
-    x_label: False Positive Rate
-    y_label: True Positive Rate
 params:
 - dvclive/params.yaml
 metrics:
 - dvclive/metrics.json
+plots:
+- dvclive/plots/sklearn/roc.json:
+    template: simple
+    x: fpr
+    y: tpr
+    title: Receiver operating characteristic (ROC)
+    x_label: False Positive Rate
+    y_label: True Positive Rate

@@ -2,7 +2,6 @@ import sys
 import os
 import yaml
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from dvclive import Live
@@ -42,21 +41,17 @@ ss = StandardScaler()
 X_train = ss.fit_transform(X_train)
 X_test = ss.transform(X_test)
     
-# with Live() as live:
-#     live.log_param("n_estimators", n_estimators)
-#     clf = RandomForestClassifier(n_estimators=n_estimators)
-#     clf.fit(X_train, y_train.values.ravel())
+with Live() as live:
+    live.log_param("n_estimators", n_estimators)
+    clf = RandomForestClassifier(n_estimators=n_estimators)
+    clf.fit(X_train, y_train.values.ravel())
 
-#     y_train_pred = clf.predict(X_train)
+    y_train_pred = clf.predict(X_test)
 
-#     live.log_metric("train/f1", f1_score(y_train, y_train_pred, average="weighted"), plot=False)
-#     live.log_sklearn_plot(
-#         "roc", y_train, y_train_pred, name="train/confusion_matrix",
-#         title="Train Confusion Matrix")
+    live.log_metric("test/f1", f1_score(y_test, y_train_pred, average="weighted"), plot=False)
+    live.log_sklearn_plot("roc", y_test, y_train_pred)
 
-#     y_test_pred = clf.predict(X_test)
+    y_train_pred = clf.predict(X_train)
 
-#     live.log_metric("test/f1", f1_score(y_test, y_test_pred, average="weighted"), plot=False)
-#     live.log_sklearn_plot(
-#         "roc", y_test, y_test_pred, name="test/confusion_matrix",
-#         title="Test Confusion Matrix")
+    live.log_metric("train/f1", f1_score(y_train, y_train_pred, average="weighted"), plot=False)
+    #live.log_sklearn_plot("roc", y_train, y_train_pred)
