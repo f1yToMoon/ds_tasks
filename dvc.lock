@@ -14,7 +14,7 @@ stages:
       size: 1691
     params:
       params.yaml:
-        train.n_estimators: 1
+        train.n_estimators: 10
   prepare:
     cmd: python src/prepare.py
     deps:
